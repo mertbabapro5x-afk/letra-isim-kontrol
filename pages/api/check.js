@@ -1,4 +1,4 @@
-expoexport default async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ message: 'Method not allowed' });
 
   const { name } = req.body;
@@ -32,11 +32,15 @@ expoexport default async function handler(req, res) {
   Çıktıyı kesinlikle belirtilen JSON formatında ver.`;
 
   try {
-    // API adresi v1 kararlı sürümüne ve model ismi en güncel formata güncellendi
-    const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+    // API adresi ve kimlik doğrulama yöntemi Google standartlarına göre tamamen yenilendi
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`;
+    
     const response = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "x-goog-api-key": GEMINI_API_KEY // API Anahtarı artık güvenli başlık olarak iletiliyor
+      },
       body: JSON.stringify({
         contents: [{ parts: [{ text: `Kontrol edilecek isim: "${name}"` }] }],
         systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
@@ -62,7 +66,7 @@ expoexport default async function handler(req, res) {
     }
 
     if (!data.candidates || !data.candidates[0]?.content?.parts?.[0]?.text) {
-      return res.status(500).json({ status: 'ERROR', reason: 'Yapay zeka geçerli bir yanıt üretemedi.' });
+      return res.status(500).json({ status: 'ERROR', reason: 'Yapay zeka geçerli bir yanıt üretemedi veya kota doldu.' });
     }
 
     const result = JSON.parse(data.candidates[0].content.parts[0].text);
