@@ -4,6 +4,10 @@ export default async function handler(req, res) {
   const { name } = req.body;
   const GEMINI_API_KEY = process.env.GEMINI_API_KEY; 
 
+  if (!GEMINI_API_KEY) {
+    return res.status(500).json({ status: 'ERROR', reason: 'Vercel üzerinde GEMINI_API_KEY tanımlanmamış!' });
+  }
+
   const SYSTEM_INSTRUCTION = `Sen Letra Roleplay sunucusunun IC İsim Onay botusun. Görevin, gönderilen isimlerin kurallara ve yasaklı listeye (Blacklist) uygunluğunu denetlemektir.
   KURALLAR:
   1. Ünlü isimleri (şarkıcı, futbolcu, siyasetçi, bilim insanı, seri katil vb.) yasaktır.
@@ -51,9 +55,20 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
+    
+    // Google'dan gelen ham hatayı anlamak için güvenlik kontrolü
+    if (data.error) {
+      return res.status(500).json({ status: 'ERROR', reason: `Google API Hatası: ${data.error.message}` });
+    }
+
+    if (!data.candidates || !data.candidates[0]?.content?.parts?.[0]?.text) {
+      return res.status(500).json({ status: 'ERROR', reason: 'Yapay zeka geçerli bir yanıt üretemedi.' });
+    }
+
     const result = JSON.parse(data.candidates[0].content.parts[0].text);
     return res.status(200).json(result);
   } catch (error) {
-    return res.status(500).json({ status: 'ERROR', reason: 'API Hatası oluştu.' });
+    console.error("Detaylı Hata Logu:", error);
+    return res.status(500).json({ status: 'ERROR', reason: `Sistem Hatası: ${error.message}` });
   }
 }
