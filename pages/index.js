@@ -26,24 +26,24 @@ export default function Home() {
   };
 
   return (
-    <div className="text-slate-200 min-h-screen flex items-center justify-center p-4" style={{background: 'radial-gradient(circle at center, #0b192c 0%, #000814 100%)'}}>
+    <div className="text-slate-200 min-h-screen flex items-center justify-center p-4" style={{background: 'radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%)'}}>
       <head>
         <title>Letra Roleplay - IC İsim Kontrolü</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
       </head>
-      <div className="w-full max-w-lg bg-slate-900/80 backdrop-blur-md border border-blue-500/30 rounded-2xl shadow-2xl p-6 md:p-8 space-y-6">
+      <div className="w-full max-w-lg bg-slate-900/80 backdrop-blur-md border border-pink-500/30 rounded-2xl shadow-2xl p-6 md:p-8 space-y-6">
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-300">LETRA ROLEPLAY</h1>
-          <p className="text-sm uppercase font-semibold tracking-widest text-blue-400/80">IC İsim Kontrol Sistemi</p>
+          <h1 className="text-3xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-400">LETRA ROLEPLAY</h1>
+          <p className="text-sm uppercase font-semibold tracking-widest text-pink-400/80">IC İsim Kontrol Sistemi</p>
         </div>
         <hr className="border-slate-800" />
         <div className="space-y-4">
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Karakter Adı ve Soyadı</label>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 text-slate-100 placeholder-slate-600 rounded-xl px-4 py-3 transition-all outline-none text-center font-medium" placeholder="Örn: Joseph Darry" />
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full bg-slate-950 border border-slate-800 focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 text-slate-100 placeholder-slate-600 rounded-xl px-4 py-3 transition-all outline-none text-center font-medium" placeholder="Örn: Joseph Darry" />
           </div>
-          <button onClick={checkName} disabled={loading} className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-blue-600/20 active:scale-[0.99] transition-all flex items-center justify-center space-x-2">
+          <button onClick={checkName} disabled={loading} className="w-full bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-400 text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-pink-600/20 active:scale-[0.99] transition-all flex items-center justify-center space-x-2">
             {loading ? <i className="fa-solid fa-spinner animate-spin"></i> : <i className="fa-solid fa-magnifying-glass"></i>}
             <span>{loading ? 'Sorgulanıyor...' : 'KONTROL ET'}</span>
           </button>
@@ -63,7 +63,7 @@ export default function Home() {
           </div>
         )}
         <div className="bg-slate-950/50 rounded-xl p-3 border border-slate-800 text-center">
-          <span className="text-xs text-slate-500 flex items-center justify-center gap-1"><i className="fa-solid fa-circle-info text-blue-500/70"></i>Gemini yapay zekâ altyapısı ile anlık denetlenir.</span>
+          <span className="text-xs text-slate-500 flex items-center justify-center gap-1"><i className="fa-solid fa-circle-info text-pink-500/70"></i>xxGemini yapay zekâ altyapısı ile anlık denetlenir.</span>
         </div>
       </div>
     </div>
