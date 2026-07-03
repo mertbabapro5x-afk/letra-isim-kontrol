@@ -63,7 +63,7 @@ export default function Home() {
           </div>
         )}
         <div className="bg-slate-950/50 rounded-xl p-3 border border-slate-800 text-center">
-          <span className="text-xs text-slate-500 flex items-center justify-center gap-1"><i className="fa-solid fa-circle-info text-pink-500/70"></i>Gemini yapay zekâ altyapısı ile anlık denetlenir.</span>
+          <span className="text-xs text-slate-500 flex items-center justify-center gap-1"><i className="fa-solid fa-circle-info text-pink-500/70"></i>Kurallara göre anlık denetlenir.</span>
         </div>
       </div>
     </div>
