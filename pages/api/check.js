@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+expoexport default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ message: 'Method not allowed' });
 
   const { name } = req.body;
@@ -32,7 +32,8 @@ export default async function handler(req, res) {
   Çıktıyı kesinlikle belirtilen JSON formatında ver.`;
 
   try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+    // API adresi v1 kararlı sürümüne ve model ismi en güncel formata güncellendi
+    const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
     const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -56,7 +57,6 @@ export default async function handler(req, res) {
 
     const data = await response.json();
     
-    // Google'dan gelen ham hatayı anlamak için güvenlik kontrolü
     if (data.error) {
       return res.status(500).json({ status: 'ERROR', reason: `Google API Hatası: ${data.error.message}` });
     }
